@@ -1,0 +1,81 @@
+import axios, { type AxiosError, type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+
+type AuthHandlers = {
+  getToken: () => string | undefined;
+  onLogout: () => void;
+};
+
+type InitOptions = {
+  baseURL?: string;
+};
+
+let authHandlers: AuthHandlers | null = null;
+
+// biome-ignore lint/style/useExportsLast: <explanation>
+export const setAuthHandlers = (handlers: AuthHandlers): void => {
+  authHandlers = handlers;
+};
+
+class Http {
+  private instance: AxiosInstance | null = null;
+
+  public init(options: InitOptions = {}): AxiosInstance {
+    if (this.instance) return this.instance;
+
+    this.instance = axios.create({
+      baseURL: options.baseURL,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    this.instance.interceptors.request.use(config => {
+      const token = authHandlers?.getToken?.();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+
+    this.instance.interceptors.response.use(
+      response => response,
+      (error: AxiosError) => {
+        if (error.response?.status === 401) {
+          authHandlers?.onLogout?.();
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return this.instance;
+  }
+
+  private getInstance(): AxiosInstance {
+    if (!this.instance) {
+      throw new Error('HTTP client not initialized. Call init() before making requests.');
+    }
+    return this.instance;
+  }
+
+  public get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.getInstance().get<T>(url, config);
+  }
+
+  public post<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.getInstance().post<T>(url, data, config);
+  }
+
+  public put<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.getInstance().put<T>(url, data, config);
+  }
+
+  public patch<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.getInstance().patch<T>(url, data, config);
+  }
+
+  public delete<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.getInstance().delete<T>(url, config);
+  }
+}
+
+export default new Http();

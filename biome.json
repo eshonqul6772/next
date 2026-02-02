@@ -1,0 +1,110 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.12/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "useExhaustiveDependencies": "off",
+        "useUniqueElementIds": "error"
+      },
+      "performance": {
+        "noReExportAll": "error"
+      },
+      "complexity": {
+        "noUselessFragments": "error",
+        "noBannedTypes": "error",
+        "noForEach": "error"
+      },
+      "a11y": {
+        "useButtonType": "off",
+        "useKeyWithClickEvents": "off",
+        "noSvgWithoutTitle": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "error",
+        "noEnum": "error",
+        "noExportedImports": "error",
+        "noMagicNumbers": "off",
+        "noNamespace": "error",
+        "noNestedTernary": "error",
+        "useDefaultSwitchClause": "error",
+        "useExportsLast": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["kebab-case"],
+            "requireAscii": true
+          }
+        },
+        "useNumericSeparators": "error",
+        "useReactFunctionComponents": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noAlert": "error",
+        "noVar": "error",
+        "useAwait": "error",
+        "noEmptyInterface": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "none",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "arrowParentheses": "asNeeded"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [":NODE:"],
+              ":BLANK_LINE:",
+              ["react", "react/**", "react-*"],
+              ["next", "next/**", "next-*"],
+              "@tanstack/**",
+              [":PACKAGE:"],
+              ":BLANK_LINE:",
+              ["@/shared", "@/shared/**"],
+              ":BLANK_LINE:",
+              ["@/features", "@/features/**"],
+              ":BLANK_LINE:",
+              ["@/entities", "@/entities/**"],
+              ":BLANK_LINE:",
+              ["@/pages", "@/pages/**"],
+              ":BLANK_LINE:",
+              [":ALIAS:"],
+              ":BLANK_LINE:",
+              [":PATH:"]
+            ],
+            "identifierOrder": "lexicographic"
+          }
+        }
+      }
+    }
+  }
+}
