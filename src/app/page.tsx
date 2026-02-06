@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Loader } from '@mantine/core';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@mantine/core';
 
 import { useAuth } from '@/features/auth/hooks/useAuth';
 
