@@ -2,23 +2,20 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Loader } from '@mantine/core';
-
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { Loader, Center } from '@mantine/core';
 
 const RootPage = () => {
   const router = useRouter();
-  const auth = useAuth();
 
   useEffect(() => {
-    if (!auth.isFetched) {
-      return;
-    }
+    router.replace('/home');
+  }, [router]);
 
-    router.replace(auth.isAuthenticated ? '/dashboard' : '/login');
-  }, [auth.isFetched, auth.isAuthenticated, router]);
-
-  return <Loader />;
+  return (
+    <Center h="100vh">
+      <Loader color="pink" size="lg" />
+    </Center>
+  );
 };
 
 export default RootPage;

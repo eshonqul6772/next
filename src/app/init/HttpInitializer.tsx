@@ -35,7 +35,7 @@ const HttpInitializer = () => {
       currentLanguage: storage.local.get(config.language.key),
       initialLanguage: config.language.initial,
       backend: {
-        loadPath: `http://localhost:4445/api/v1/admin/references/translations/ADMIN_CABINET/uz`
+        loadPath: `/api/admin/references/translations/ADMIN_CABINET/{{lng}}`
       },
       onChange: language => storage.local.set('language', language)
     });

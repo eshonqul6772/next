@@ -10,6 +10,9 @@ export const Login = ({ values }: { values: Types.IForm.Login }): AxiosPromise<T
     password: values.password
   });
 
+export const Register = ({ values }: { values: Types.IForm.Register }): AxiosPromise<Types.IApi.Register.Response> =>
+  http.post('/auth/register', values);
+
 export const Logout = () => http.post('/auth/logout');
 
 export const Profile = (): AxiosPromise<Types.IApi.Profile.Response> => http.get('/auth/me');

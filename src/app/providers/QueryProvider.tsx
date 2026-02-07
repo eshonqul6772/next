@@ -35,7 +35,8 @@ export const queryClient = new ReactQuery.QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      retry: 2
+      retry: 2,
+      staleTime: 60 * 1000
     }
   }
 });

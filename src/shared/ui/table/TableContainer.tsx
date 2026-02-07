@@ -1,5 +1,6 @@
 import { type ReactNode, isValidElement } from 'react';
 import { Table as MantineTable, Stack } from '@mantine/core';
+import { QueryEmpty } from '@/shared/ui/QueryState';
 
 import type { PaginationParams } from '@/widgets/layout/components/Sidebar/menu';
 
@@ -115,7 +116,10 @@ const TableContainer = <T extends Record<string, any>>({ columns, data }: Props<
             ) : (
               <MantineTable.Tr>
                 <MantineTable.Td colSpan={columns.length} align="center">
-                  No data
+                  <QueryEmpty
+                    title="Ma'lumot topilmadi"
+                    description="Hozircha ma'lumot mavjud emas"
+                  />
                 </MantineTable.Td>
               </MantineTable.Tr>
             )}

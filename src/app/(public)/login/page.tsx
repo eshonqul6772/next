@@ -17,12 +17,18 @@ const LoginPage = () => {
     }
 
     if (auth.isAuthenticated) {
-      router.replace('/dashboard');
+      // Redirect based on role
+      const isAdmin = auth.profile?.role?.name === 'Admin';
+      router.replace(isAdmin ? '/dashboard' : '/home');
     }
-  }, [auth.isFetched, auth.isAuthenticated, router]);
+  }, [auth.isFetched, auth.isAuthenticated, auth.profile, router]);
 
   if (!auth.isFetched) {
-    return <Loader />;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-50 to-emerald-100">
+        <Loader color="green" />
+      </div>
+    );
   }
 
   if (auth.isAuthenticated) {

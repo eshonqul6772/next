@@ -22,6 +22,17 @@ export declare namespace IApi {
     }
   }
 
+  export namespace Register {
+    export interface Response {
+      data: {
+        id: number;
+        firstName: string;
+        lastName: string;
+        username: string;
+      };
+    }
+  }
+
   export namespace Profile {
     export interface Response {
       data: IEntity.Profile;
@@ -56,6 +67,15 @@ export declare namespace IForm {
   export interface Login {
     username: string;
     password: string;
+  }
+
+  export interface Register {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
   }
 }
 

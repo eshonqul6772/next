@@ -11,7 +11,7 @@ export interface RoleFormValues {
 
 // Entity
 export interface RoleData extends RoleFormValues {
-  id: number;
+  id: number | null;
   createdAt: string;
   updatedAt: string;
 }

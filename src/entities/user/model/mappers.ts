@@ -6,7 +6,7 @@ import { getFile, getIdAndName } from '@/shared/lib/utils/mappers';
 import type { UserData, UserFormValues } from './types';
 
 export const getData = (item?: unknown): UserData => ({
-  id: get(item, 'id') || '',
+  id: get(item, 'id') || null,
   firstName: get(item, 'firstName') || '',
   lastName: get(item, 'lastName') || '',
   phone: get(item, 'phone') || '',
@@ -18,7 +18,7 @@ export const getData = (item?: unknown): UserData => ({
   roleId: get(item, 'role.id') != null ? String(get(item, 'role.id')) : null,
   createdAt: get(item, 'createdAt') || '',
   updatedAt: get(item, 'updatedAt') || '',
-  status: get(item, 'status') || ''
+  status: get(item, 'status') || STATUS.INACTIVE
 });
 
 export const getFormValues = (item?: UserData): UserFormValues => ({
